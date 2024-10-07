@@ -41,7 +41,7 @@ public class LoggingAspect {
 	// - Decide which advice type is most appropriate
 	// - Write a pointcut expression that selects only find* methods on
 	//    our repository classes.
-	@Before("execution(* rewards.internal.account.*Repository.find*(..))")
+	@Before("execution(* rewards.internal.*.*Repository.find*(..))")
 	public void implLogging(JoinPoint joinPoint) {
 		// Do not modify this log message or the test will fail
 		logger.info(BEFORE + " advice implementation - " + joinPoint.getTarget().getClass() + //
@@ -54,7 +54,7 @@ public class LoggingAspect {
     // - Mark this method as an around advice.
 	// - Write a pointcut expression to match on all update* methods
 	//	 on all Repository classes.
-	@Around("execution(* rewards.internal.account.*Repository.update*(..))")
+	@Around("execution(* rewards.internal.*.*Repository.update*(..))")
 	public Object monitor(ProceedingJoinPoint repositoryMethod) throws Throwable {
 		String name = createJoinPointTraceName(repositoryMethod);
 		Monitor monitor = monitorFactory.start(name);

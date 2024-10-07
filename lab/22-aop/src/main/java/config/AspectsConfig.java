@@ -17,8 +17,8 @@ import rewards.internal.monitor.jamon.JamonMonitorFactory;
 //    application since it will be automatically added through
 //    auto configuration.)
 @Configuration
+@ComponentScan("rewards.internal.aspects")
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = "rewards.internal.aspects")
 public class AspectsConfig {
 
 	@Bean
