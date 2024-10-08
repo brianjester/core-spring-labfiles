@@ -60,30 +60,30 @@ import static org.junit.jupiter.api.Assertions.*;
  * - Examine the logs, they should indicate "stub" repositories were used.
  */
 
-/* TODO-04: Change active-profile to "jdbc".
+/* xTODO-04: Change active-profile to "jdbc".
  * - Rerun the test, it should pass.
  * - Check which repository implementations are being used now.
  */
 
-/* TODO-05: Assign beans to the "local" profile
+/* xTODO-05: Assign beans to the "local" profile
  * - Go to corresponding step in TestInfrastructureLocalConfig class.
  */
 
-/* TODO-06: Use "jdbc" and "local" as active profiles
+/* xTODO-06: Use "jdbc" and "local" as active profiles
  * - Now that the bean 'dataSource' is specific to the local profile, should we expect
  * 	 this test to be successful?
  * - Make the appropriate changes so the current test uses 2 profiles ('jdbc' and 'local').
  * - Rerun the test, it should pass.
  */
 
-/* TODO-07: Use "jdbc" and "jndi" as active profiles
+/* xTODO-07: Use "jdbc" and "jndi" as active profiles
  * - Open TestInfrastructureJndiConfig and note the different datasource that will be
  * 	 used if the profile = 'jndi'.
  * - Now update the current test so it uses profiles 'jdbc' and 'jndi'.
  * - Rerun the test, it should pass.
  */
 
-/* TODO-08 (Optional): Create an inner static class from TestInfrastructureConfig
+/* xTODO-08 (Optional): Create an inner static class from TestInfrastructureConfig
  * - Once inner static class is created, remove configuration
  *   class reference to TestInfrastructureConfig class from the annotation
  *   you added to this class in TO DO-01 above. (For more detailed on, refer tp
