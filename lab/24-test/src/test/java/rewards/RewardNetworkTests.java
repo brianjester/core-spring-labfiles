@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *   creating application context for the test
  * - Using profiles in the test
  *
- * TODO-01: Use Spring TestContext Framework
+ * xTODO-01: Use Spring TestContext Framework
  * - Read through Spring document on Spring TestContext Framework
  *   (https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/testing.html#testcontext-framework)
  * - Add annotation(s) to this class so that it can
@@ -37,14 +38,14 @@ import static org.junit.jupiter.api.Assertions.*;
  * - Re-run the current test, it should pass.
  */
 
-/* TODO-02: Annotate all 'Stub*Repository' classes with @Repository
+/* xTODO-02: Annotate all 'Stub*Repository' classes with @Repository
  * - In the package rewards/internal, annotate all 'Stub*Repository' classes
  *   with the @Repository annotation (WITHOUT specifying any profile yet).
  *   (Make sure you are changing code in the '24-test' project.)
  * - Rerun the current test, it should fail.  Why?
  */
 
-/* TODO-03: Assign the 'jdbc' profile to all Jdbc*Repository classes
+/* xTODO-03: Assign the 'jdbc' profile to all Jdbc*Repository classes
  * - Using the @Profile annotation, assign the 'jdbc' profile to all Jdbc*Repository classes
  *   (such as JdbcAccountRepository).  (Be sure to annotate the actual repository classes in
  *   src/main/java, not the test classes in src/main/test!)
@@ -86,6 +87,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * - Run the test again.
  */
 @SpringJUnitConfig(classes=TestInfrastructureConfig.class)
+@ActiveProfiles(profiles = {"jdbc", "local"})
 public class RewardNetworkTests {
 	/**
 	 * The object being tested.

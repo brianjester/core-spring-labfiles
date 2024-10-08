@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 
 import javax.naming.Context;
@@ -22,6 +23,7 @@ import javax.sql.DataSource;
  * a <tt>BeanFactoryPostProcessor</tt> - it will be invoked just before the
  * first bean is created.
  */
+@Profile("jndi")
 public class SimpleJndiHelper implements BeanFactoryPostProcessor {
 
 	public static final String REWARDS_DB_JNDI_PATH = "java:/comp/env/jdbc/rewards";
