@@ -1,5 +1,6 @@
 package rewards.internal;
 
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import rewards.AccountContribution;
 import rewards.Dining;
@@ -49,7 +50,7 @@ public class RewardNetworkImpl implements RewardNetwork {
 		this.rewardRepository = rewardRepository;
 	}
 
-	// TODO-06: Modify the transactional attributes of the rewardAccountFor() method below.
+	// xTODO-06: Modify the transactional attributes of the rewardAccountFor() method below.
 	// Switch the propagation level to require a NEW transaction whenever invoked.  
 	
 	// xTODO-01: Annotate this method as needing transactional behavior
