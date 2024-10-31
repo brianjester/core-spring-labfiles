@@ -2,6 +2,10 @@ package accounts.web;
 
 import accounts.AccountManager;
 import common.money.Percentage;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.annotation.Timed;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +25,7 @@ import java.util.List;
  * A controller handling requests for CRUD operations on Accounts and their
  * Beneficiaries.
  *
- * TODO-11: Access the new "/metrics/account.fetch" metric
+ * xTODO-11: Access the new "/metrics/account.fetch" metric
  * - Let the application get restarted via devtools
  * - Access "/metrics" endpoint, and verify the presence of "account.fetch" metric
  * - Access some accounts (i.e. http://localhost:8080/accounts/1)
@@ -35,14 +39,16 @@ public class AccountController {
 
 	private AccountManager accountManager;
 
-	// TODO-08: Add a Micrometer Counter
+	private Counter counter;
+	// xTODO-08: Add a Micrometer Counter
 	// - Inject a MeterRegistry through constructor injection
 	//   (Modify the existing constructor below)
 	// - Create a Counter from the MeterRegistry: name the counter "account.fetch"
 	//   with a tag of "type"/"fromCode" key/value pair
 	@Autowired
-	public AccountController(AccountManager accountManager) {
+	public AccountController(AccountManager accountManager, MeterRegistry registry) {
 		this.accountManager = accountManager;
+		counter = registry.counter("account.fetch", "type", "fromCode");
 	}
 
 	/**
@@ -53,14 +59,16 @@ public class AccountController {
      * - Set the metric name to "account.timer"
      * - Set a extra tag with "source"/"accountSummary" key/value pair
 	 */
+	@Timed(value="account.timer", extraTags = {"source", "accountSummary"})
 	@GetMapping(value = "/accounts")
 	public List<Account> accountSummary() {
+		logger.debug("Logging message within accountSummary()");
 		return accountManager.getAllAccounts();
 	}
 
 	/**
 	 *
-	 *  TODO-09: Increment the Counter each time "accountDetails" method below is called.
+	 *  xTODO-09: Increment the Counter each time "accountDetails" method below is called.
      *  - Add code to increment the counter
 	 *
 	 * ----------------------------------------------------
@@ -70,9 +78,10 @@ public class AccountController {
      *  - Set the metric name to "account.timer"
      *  - Set extra tag with "source"/"accountDetails" key/value pair
 	 */
+	@Timed(value="account.timer", extraTags = {"source", "accountDetails"})
 	@GetMapping(value = "/accounts/{id}")
 	public Account accountDetails(@PathVariable int id) {
-
+		counter.increment();
 		return retrieveAccount(id);
 	}
 
